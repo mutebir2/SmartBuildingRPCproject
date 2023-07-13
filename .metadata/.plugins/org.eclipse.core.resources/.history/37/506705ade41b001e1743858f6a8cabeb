@@ -1,0 +1,46 @@
+package temp;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
+
+public class GRPCTEMPServer {
+    
+    private static final int PORT = 8081;
+
+    public static void main(String args[]) throws InterruptedException {
+        if (isPortAvailable(PORT)) {
+            startServer();
+        } else {
+            System.out.println("Port " + PORT + " is already in use.");
+        }
+    }
+
+    private static boolean isPortAvailable(int port) {
+        try (Socket ignored = new Socket()) {
+            ignored.connect(new InetSocketAddress("localhost", port), 1000);
+            return false; // Port is already in use
+        } catch (IOException e) {
+            return true; // Port is available to use
+        }
+    }
+
+    private static void startServer() throws InterruptedException {
+        Server server = null;
+        try {
+            server = ServerBuilder.forPort(PORT).addService(new TemperatureService()).build();
+            server.start();
+            System.out.println("Temperature control server started at port " + server.getPort());
+            server.awaitTermination();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (server != null) {
+                server.shutdownNow();
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+package grpcClient;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import temperature_control.Temp.TemperatureReading;
+import temperature_control.Temp.TemperatureRequest;
+import temperature_control.TemperatureControlServiceGrpc;
+import temperature_control.TemperatureControlServiceGrpc.TemperatureControlServiceBlockingStub;
+
+public class GRPCclient {
+    private static final String SERVER_ADDRESS = "localhost";
+    private static final int SERVER_PORT = 8080;
+
+    public static void main(String args[]) {
+        // Create a channel to connect to the server
+        ManagedChannel channel = ManagedChannelBuilder
+                .forAddress(SERVER_ADDRESS, SERVER_PORT)
+                .usePlaintext()
+                .build();
+
+        try {
+            // Create a blocking stub for making RPC calls
+            TemperatureControlServiceBlockingStub stub = TemperatureControlServiceGrpc.newBlockingStub(channel);
+
+            // Create a temperature request
+            TemperatureRequest temperatureRequest = TemperatureRequest.newBuilder()
+                    .setLocation("Location")
+                    .build();
+
+            // Send the temperature request and receive the temperature reading response
+            TemperatureReading response = stub.getTemperature(temperatureRequest);
+
+            // Print the received temperature reading
+            System.out.println("Received temperature: " + response.getTemperature());
+        } catch (Exception e) {
+            // Handle any exceptions that occur during the RPC call
+            System.err.println("RPC failed: " + e.getMessage());
+        } finally {
+            // Shutdown the channel when finished
+            channel.shutdown();
+        }
+    }
+}

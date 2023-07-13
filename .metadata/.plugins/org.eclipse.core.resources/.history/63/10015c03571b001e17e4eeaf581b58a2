@@ -1,0 +1,12 @@
+package grpcClient;
+
+import io.grpc.ManagedChannelBuilder;
+
+public class GRPCclient {
+	public static void main(String args[]) {
+		
+		ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
+	
+	}
+
+}

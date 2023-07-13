@@ -1,0 +1,27 @@
+package grpcClient;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import temperature_control.Temp.TemperatureReading;
+import temperature_control.Temp.TemperatureRequest;
+import temperature_control.TemperatureControlServiceGrpc;
+import temperature_control.TemperatureControlServiceGrpc.TemperatureControlServiceBlockingStub;
+
+public class GRPCclient {
+	public static void main(String args[]) {
+		
+	 ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
+		
+	 TemperatureControlServiceBlockingStub TempStub = TemperatureControlServiceGrpc.newBlockingStub(channel);
+	 
+	 TemperatureRequest temperatureRequest = TemperatureRequest.newBuilder().setLocation("Location").build();
+	 
+	 //TempStub.getTemperature(temperatureRequest);
+	 
+	 TemperatureReading response = TempStub.getTemperature(temperatureRequest);
+	 
+	 System.out.println(response);
+	
+	}
+
+}

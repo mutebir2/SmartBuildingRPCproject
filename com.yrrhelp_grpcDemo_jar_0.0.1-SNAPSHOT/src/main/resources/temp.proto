@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package humidity;
+
+service HumidityService {
+  // Get the current humidity level for a specific zone
+  rpc GetCurrentHumidity (CurrentHumidityRequest) returns (stream CurrentHumidityResponse) {}
+
+  // Adjust the humidity level for a specific zone
+  rpc AdjustHumidity (AdjustHumidityRequest) returns (stream AdjustHumidityResponse) {}
+}
+
+message CurrentHumidityRequest {
+  string zone_id = 1;
+}
+
+message CurrentHumidityResponse {
+  float current_humidity = 1;
+}
+
+message AdjustHumidityRequest {
+  string zone_id = 1;
+  float humidity_adjustment = 2;
+}
+
+message AdjustHumidityResponse {
+  float adjusted_humidity = 1;
+}

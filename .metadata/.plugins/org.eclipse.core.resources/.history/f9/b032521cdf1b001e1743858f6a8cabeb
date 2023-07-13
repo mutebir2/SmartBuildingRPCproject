@@ -1,0 +1,28 @@
+package temp;
+
+import java.io.IOException;
+
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
+
+public class GRPCTEMPServer {
+    
+    private static final int PORT = 8080;
+
+    public static void main(String args[]) throws InterruptedException {
+        Server server = null;
+        try {
+            server = ServerBuilder.forPort(PORT).addService(new TemperatureService()).build();
+            server.start();
+            System.out.println("Temperature control server started at port " + server.getPort());
+            server.awaitTermination();
+        } catch (IOException e) {
+            // Handle the exception appropriately
+            e.printStackTrace();
+        } finally {
+            if (server != null) {
+                server.shutdownNow();
+            }
+        }
+    }
+}
