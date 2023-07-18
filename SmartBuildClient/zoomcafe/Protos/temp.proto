@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package temperature_control;
+
+message TemperatureRequest {
+  string location = 1;
+}
+
+message TemperatureReading {
+  float temperature = 1;
+  string location = 2;
+  string DateTime = 3;
+}
+
+service TemperatureControlService {
+  rpc GetTemperature(TemperatureRequest) returns (TemperatureReading) {}
+}

@@ -18,18 +18,14 @@ public class TemperatureService extends TemperatureControlServiceImplBase {
         String zoneId = request.getZoneId();
         float temperatureAdjustment = request.getTemperatureAdjustment();
 
-        // TODO: Implement logic to adjust temperature for the specified zoneId
-        // Dummy implementation: Simply add the temperature adjustment to a default temperature
-
+      
         // Retrieve the current temperature for the zone (dummy data)
         float currentTemperature = 25.0f;
 
         // Calculate the adjusted temperature
         float adjustedTemperature = currentTemperature + temperatureAdjustment;
 
-        // Update the temperature for the zone (dummy data)
         // TODO: Implement the actual update mechanism based on your requirements
-
         // Sample response
         String responseMessage = "Temperature in zone " + zoneId + " adjusted by " + temperatureAdjustment +
                 ". Current temperature: " + adjustedTemperature;
@@ -44,7 +40,7 @@ public class TemperatureService extends TemperatureControlServiceImplBase {
 
     @Override
     public void setDesiredTemperature(Temp.DesiredTemperatureRequest request, StreamObserver<Temp.SetTemperatureResponse> responseObserver) {
-        super.setDesiredTemperature(request, responseObserver); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        
     }
 
 	@Override

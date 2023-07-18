@@ -1,0 +1,39 @@
+﻿@model SmartBuildingClient.Models.SetTemperatureViewModel
+@{ViewBag.Title = "Employee";}
+<div class="row">
+    <div class = "col-md-12 grid-margin">
+        <div class="card">
+            <div class="body">
+                <div class="row">
+                    <div class="col-md-12  table-responsive-md pr-5 p-5">
+                       <h2 class="">Adjust Temperature</h2>
+                   
+                         <div class="container m-2">
+                            <form asp-controller="Home" asp-action="setTemperature" method="post">
+                              <div class="form-group">
+                                <label asp-for=ZoneId></label>
+                                <input type="text" class="form-control" asp-for=ZoneId id="label1" placeholder="Building zone" required>
+                              </div>
+                              <div class="form-group">
+                                <label asp-for=TemperatureToSet></label>
+                                <input type="" asp-for=TemperatureToSet class="form-control" id="label2" placeholder="Temperature" required  >
+                              </div>
+                              <br />
+                              <button type="submit" class="btn btn-primary">Adjust</button>
+                            </form>
+                          </div>
+
+                        @if (Model != null)
+                        {
+                            
+                           <div class="alert alert-success rounded" role="alert">
+                                <p class="text-primary">@Model.Message</p>
+                            </div>
+                         }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

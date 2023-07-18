@@ -19,7 +19,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.15.0)",
-    comments = "Source: temp.proto")
+    comments = "Source: humidity.proto")
 public final class HumidityServiceGrpc {
 
   private HumidityServiceGrpc() {}
@@ -27,30 +27,30 @@ public final class HumidityServiceGrpc {
   public static final String SERVICE_NAME = "humidity.HumidityService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<humidity.Temp.CurrentHumidityRequest,
-      humidity.Temp.CurrentHumidityResponse> getGetCurrentHumidityMethod;
+  private static volatile io.grpc.MethodDescriptor<humidity.Humidity.CurrentHumidityRequest,
+      humidity.Humidity.CurrentHumidityResponse> getGetCurrentHumidityMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetCurrentHumidity",
-      requestType = humidity.Temp.CurrentHumidityRequest.class,
-      responseType = humidity.Temp.CurrentHumidityResponse.class,
+      requestType = humidity.Humidity.CurrentHumidityRequest.class,
+      responseType = humidity.Humidity.CurrentHumidityResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<humidity.Temp.CurrentHumidityRequest,
-      humidity.Temp.CurrentHumidityResponse> getGetCurrentHumidityMethod() {
-    io.grpc.MethodDescriptor<humidity.Temp.CurrentHumidityRequest, humidity.Temp.CurrentHumidityResponse> getGetCurrentHumidityMethod;
+  public static io.grpc.MethodDescriptor<humidity.Humidity.CurrentHumidityRequest,
+      humidity.Humidity.CurrentHumidityResponse> getGetCurrentHumidityMethod() {
+    io.grpc.MethodDescriptor<humidity.Humidity.CurrentHumidityRequest, humidity.Humidity.CurrentHumidityResponse> getGetCurrentHumidityMethod;
     if ((getGetCurrentHumidityMethod = HumidityServiceGrpc.getGetCurrentHumidityMethod) == null) {
       synchronized (HumidityServiceGrpc.class) {
         if ((getGetCurrentHumidityMethod = HumidityServiceGrpc.getGetCurrentHumidityMethod) == null) {
           HumidityServiceGrpc.getGetCurrentHumidityMethod = getGetCurrentHumidityMethod = 
-              io.grpc.MethodDescriptor.<humidity.Temp.CurrentHumidityRequest, humidity.Temp.CurrentHumidityResponse>newBuilder()
+              io.grpc.MethodDescriptor.<humidity.Humidity.CurrentHumidityRequest, humidity.Humidity.CurrentHumidityResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "humidity.HumidityService", "GetCurrentHumidity"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  humidity.Temp.CurrentHumidityRequest.getDefaultInstance()))
+                  humidity.Humidity.CurrentHumidityRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  humidity.Temp.CurrentHumidityResponse.getDefaultInstance()))
+                  humidity.Humidity.CurrentHumidityResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new HumidityServiceMethodDescriptorSupplier("GetCurrentHumidity"))
                   .build();
           }
@@ -59,30 +59,30 @@ public final class HumidityServiceGrpc {
      return getGetCurrentHumidityMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<humidity.Temp.AdjustHumidityRequest,
-      humidity.Temp.AdjustHumidityResponse> getAdjustHumidityMethod;
+  private static volatile io.grpc.MethodDescriptor<humidity.Humidity.AdjustHumidityRequest,
+      humidity.Humidity.AdjustHumidityResponse> getAdjustHumidityMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "AdjustHumidity",
-      requestType = humidity.Temp.AdjustHumidityRequest.class,
-      responseType = humidity.Temp.AdjustHumidityResponse.class,
+      requestType = humidity.Humidity.AdjustHumidityRequest.class,
+      responseType = humidity.Humidity.AdjustHumidityResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<humidity.Temp.AdjustHumidityRequest,
-      humidity.Temp.AdjustHumidityResponse> getAdjustHumidityMethod() {
-    io.grpc.MethodDescriptor<humidity.Temp.AdjustHumidityRequest, humidity.Temp.AdjustHumidityResponse> getAdjustHumidityMethod;
+  public static io.grpc.MethodDescriptor<humidity.Humidity.AdjustHumidityRequest,
+      humidity.Humidity.AdjustHumidityResponse> getAdjustHumidityMethod() {
+    io.grpc.MethodDescriptor<humidity.Humidity.AdjustHumidityRequest, humidity.Humidity.AdjustHumidityResponse> getAdjustHumidityMethod;
     if ((getAdjustHumidityMethod = HumidityServiceGrpc.getAdjustHumidityMethod) == null) {
       synchronized (HumidityServiceGrpc.class) {
         if ((getAdjustHumidityMethod = HumidityServiceGrpc.getAdjustHumidityMethod) == null) {
           HumidityServiceGrpc.getAdjustHumidityMethod = getAdjustHumidityMethod = 
-              io.grpc.MethodDescriptor.<humidity.Temp.AdjustHumidityRequest, humidity.Temp.AdjustHumidityResponse>newBuilder()
+              io.grpc.MethodDescriptor.<humidity.Humidity.AdjustHumidityRequest, humidity.Humidity.AdjustHumidityResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "humidity.HumidityService", "AdjustHumidity"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  humidity.Temp.AdjustHumidityRequest.getDefaultInstance()))
+                  humidity.Humidity.AdjustHumidityRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  humidity.Temp.AdjustHumidityResponse.getDefaultInstance()))
+                  humidity.Humidity.AdjustHumidityResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new HumidityServiceMethodDescriptorSupplier("AdjustHumidity"))
                   .build();
           }
@@ -123,8 +123,8 @@ public final class HumidityServiceGrpc {
      * Get the current humidity level for a specific zone
      * </pre>
      */
-    public void getCurrentHumidity(humidity.Temp.CurrentHumidityRequest request,
-        io.grpc.stub.StreamObserver<humidity.Temp.CurrentHumidityResponse> responseObserver) {
+    public void getCurrentHumidity(humidity.Humidity.CurrentHumidityRequest request,
+        io.grpc.stub.StreamObserver<humidity.Humidity.CurrentHumidityResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getGetCurrentHumidityMethod(), responseObserver);
     }
 
@@ -133,8 +133,8 @@ public final class HumidityServiceGrpc {
      * Adjust the humidity level for a specific zone
      * </pre>
      */
-    public void adjustHumidity(humidity.Temp.AdjustHumidityRequest request,
-        io.grpc.stub.StreamObserver<humidity.Temp.AdjustHumidityResponse> responseObserver) {
+    public void adjustHumidity(humidity.Humidity.AdjustHumidityRequest request,
+        io.grpc.stub.StreamObserver<humidity.Humidity.AdjustHumidityResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getAdjustHumidityMethod(), responseObserver);
     }
 
@@ -144,15 +144,15 @@ public final class HumidityServiceGrpc {
             getGetCurrentHumidityMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
-                humidity.Temp.CurrentHumidityRequest,
-                humidity.Temp.CurrentHumidityResponse>(
+                humidity.Humidity.CurrentHumidityRequest,
+                humidity.Humidity.CurrentHumidityResponse>(
                   this, METHODID_GET_CURRENT_HUMIDITY)))
           .addMethod(
             getAdjustHumidityMethod(),
             asyncServerStreamingCall(
               new MethodHandlers<
-                humidity.Temp.AdjustHumidityRequest,
-                humidity.Temp.AdjustHumidityResponse>(
+                humidity.Humidity.AdjustHumidityRequest,
+                humidity.Humidity.AdjustHumidityResponse>(
                   this, METHODID_ADJUST_HUMIDITY)))
           .build();
     }
@@ -181,8 +181,8 @@ public final class HumidityServiceGrpc {
      * Get the current humidity level for a specific zone
      * </pre>
      */
-    public void getCurrentHumidity(humidity.Temp.CurrentHumidityRequest request,
-        io.grpc.stub.StreamObserver<humidity.Temp.CurrentHumidityResponse> responseObserver) {
+    public void getCurrentHumidity(humidity.Humidity.CurrentHumidityRequest request,
+        io.grpc.stub.StreamObserver<humidity.Humidity.CurrentHumidityResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getGetCurrentHumidityMethod(), getCallOptions()), request, responseObserver);
     }
@@ -192,8 +192,8 @@ public final class HumidityServiceGrpc {
      * Adjust the humidity level for a specific zone
      * </pre>
      */
-    public void adjustHumidity(humidity.Temp.AdjustHumidityRequest request,
-        io.grpc.stub.StreamObserver<humidity.Temp.AdjustHumidityResponse> responseObserver) {
+    public void adjustHumidity(humidity.Humidity.AdjustHumidityRequest request,
+        io.grpc.stub.StreamObserver<humidity.Humidity.AdjustHumidityResponse> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(getAdjustHumidityMethod(), getCallOptions()), request, responseObserver);
     }
@@ -222,8 +222,8 @@ public final class HumidityServiceGrpc {
      * Get the current humidity level for a specific zone
      * </pre>
      */
-    public java.util.Iterator<humidity.Temp.CurrentHumidityResponse> getCurrentHumidity(
-        humidity.Temp.CurrentHumidityRequest request) {
+    public java.util.Iterator<humidity.Humidity.CurrentHumidityResponse> getCurrentHumidity(
+        humidity.Humidity.CurrentHumidityRequest request) {
       return blockingServerStreamingCall(
           getChannel(), getGetCurrentHumidityMethod(), getCallOptions(), request);
     }
@@ -233,8 +233,8 @@ public final class HumidityServiceGrpc {
      * Adjust the humidity level for a specific zone
      * </pre>
      */
-    public java.util.Iterator<humidity.Temp.AdjustHumidityResponse> adjustHumidity(
-        humidity.Temp.AdjustHumidityRequest request) {
+    public java.util.Iterator<humidity.Humidity.AdjustHumidityResponse> adjustHumidity(
+        humidity.Humidity.AdjustHumidityRequest request) {
       return blockingServerStreamingCall(
           getChannel(), getAdjustHumidityMethod(), getCallOptions(), request);
     }
@@ -280,12 +280,12 @@ public final class HumidityServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_CURRENT_HUMIDITY:
-          serviceImpl.getCurrentHumidity((humidity.Temp.CurrentHumidityRequest) request,
-              (io.grpc.stub.StreamObserver<humidity.Temp.CurrentHumidityResponse>) responseObserver);
+          serviceImpl.getCurrentHumidity((humidity.Humidity.CurrentHumidityRequest) request,
+              (io.grpc.stub.StreamObserver<humidity.Humidity.CurrentHumidityResponse>) responseObserver);
           break;
         case METHODID_ADJUST_HUMIDITY:
-          serviceImpl.adjustHumidity((humidity.Temp.AdjustHumidityRequest) request,
-              (io.grpc.stub.StreamObserver<humidity.Temp.AdjustHumidityResponse>) responseObserver);
+          serviceImpl.adjustHumidity((humidity.Humidity.AdjustHumidityRequest) request,
+              (io.grpc.stub.StreamObserver<humidity.Humidity.AdjustHumidityResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -309,7 +309,7 @@ public final class HumidityServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return humidity.Temp.getDescriptor();
+      return humidity.Humidity.getDescriptor();
     }
 
     @java.lang.Override

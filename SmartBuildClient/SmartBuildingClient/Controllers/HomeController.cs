@@ -13,26 +13,26 @@ namespace SmartBuildingClient.Controllers
         {
             _logger = logger;
         }
+
         [HttpPost]
-        public IActionResult Search(string Location)
+        public async Task<IActionResult> Search(string Location)
         {
 
-            if (string.IsNullOrEmpty(Location)) {
-                TemperatureReadingViewModel obj1 = new TemperatureReadingViewModel();
-                return View(obj1);
-            }
+            //if (string.IsNullOrEmpty(Location))
+            //{
+            //    TemperatureReadingViewModel obj1 = new TemperatureReadingViewModel();
+            //    return View(obj1);
+            //}
 
-                List<TemperatureReading> Temp = ClientClass.GetTemperatureData(Location);
+            List<TemperatureReading> Temp = await ClientClass.GetTemperatureData(Location);
             TemperatureReadingViewModel obj = new TemperatureReadingViewModel();
 
             foreach (var item in Temp)
             {
                 obj.Temperature = item.Temperature;
                 obj.DateAndTime = item.DateAndTime;
-                obj.Location= item.Location;
+                obj.Location = item.Location;
             }
-
-
             return View(obj);
         }
 
@@ -40,6 +40,21 @@ namespace SmartBuildingClient.Controllers
         {
             TemperatureReadingViewModel obj1 = new TemperatureReadingViewModel();
             return View(obj1);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> setTemperature(string ZoneId, float TemperatureToSet)
+        {
+            string response = await ClientClass.AdjustTemperature(ZoneId, TemperatureToSet);
+            SetTemperatureViewModel obj = new SetTemperatureViewModel();
+            obj.Message = response;
+            return View(obj);
+        }
+
+
+        public  IActionResult setTemperature()
+        {
+            return View();
         }
 
 

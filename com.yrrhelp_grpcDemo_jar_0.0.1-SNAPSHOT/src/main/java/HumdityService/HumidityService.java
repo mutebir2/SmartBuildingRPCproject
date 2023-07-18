@@ -17,8 +17,7 @@ import io.grpc.stub.StreamObserver;
  * @author hp
  */
 public class HumidityService extends HumidityServiceImplBase{
-
-  @Override
+//adjust Humidity implementation.
   public void adjustHumidity(AdjustHumidityRequest request, StreamObserver<AdjustHumidityResponse> responseObserver) {
     String zoneId = request.getZoneId();
     float humidityAdjustment = request.getHumidityAdjustment();
@@ -46,7 +45,6 @@ public class HumidityService extends HumidityServiceImplBase{
     responseObserver.onCompleted();
   }
 
-  @Override
   public void getCurrentHumidity(CurrentHumidityRequest request, StreamObserver<CurrentHumidityResponse> responseObserver) {
     String zoneId = request.getZoneId();
 
