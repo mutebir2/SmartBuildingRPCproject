@@ -31,7 +31,7 @@ message AdjustTemperatureResponse {
 }
 
 service TemperatureControlService {
-  rpc GetTemperature(TemperatureRequest) returns (TemperatureReading) {}
+  rpc GetTemperature(TemperatureRequest) returns (stream TemperatureReading) {}
   rpc SetDesiredTemperature(DesiredTemperatureRequest) returns (SetTemperatureResponse) {}
   rpc AdjustTemperature(AdjustTemperatureRequest) returns (AdjustTemperatureResponse) {}
   

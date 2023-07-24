@@ -34,7 +34,7 @@ public final class TemperatureControlServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "GetTemperature",
       requestType = temperature_control.Temp.TemperatureRequest.class,
       responseType = temperature_control.Temp.TemperatureReading.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<temperature_control.Temp.TemperatureRequest,
       temperature_control.Temp.TemperatureReading> getGetTemperatureMethod() {
     io.grpc.MethodDescriptor<temperature_control.Temp.TemperatureRequest, temperature_control.Temp.TemperatureReading> getGetTemperatureMethod;
@@ -43,7 +43,7 @@ public final class TemperatureControlServiceGrpc {
         if ((getGetTemperatureMethod = TemperatureControlServiceGrpc.getGetTemperatureMethod) == null) {
           TemperatureControlServiceGrpc.getGetTemperatureMethod = getGetTemperatureMethod = 
               io.grpc.MethodDescriptor.<temperature_control.Temp.TemperatureRequest, temperature_control.Temp.TemperatureReading>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "temperature_control.TemperatureControlService", "GetTemperature"))
               .setSampledToLocalTracing(true)
@@ -175,7 +175,7 @@ public final class TemperatureControlServiceGrpc {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getGetTemperatureMethod(),
-            asyncUnaryCall(
+            asyncServerStreamingCall(
               new MethodHandlers<
                 temperature_control.Temp.TemperatureRequest,
                 temperature_control.Temp.TemperatureReading>(
@@ -220,7 +220,7 @@ public final class TemperatureControlServiceGrpc {
      */
     public void getTemperature(temperature_control.Temp.TemperatureRequest request,
         io.grpc.stub.StreamObserver<temperature_control.Temp.TemperatureReading> responseObserver) {
-      asyncUnaryCall(
+      asyncServerStreamingCall(
           getChannel().newCall(getGetTemperatureMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -261,8 +261,9 @@ public final class TemperatureControlServiceGrpc {
 
     /**
      */
-    public temperature_control.Temp.TemperatureReading getTemperature(temperature_control.Temp.TemperatureRequest request) {
-      return blockingUnaryCall(
+    public java.util.Iterator<temperature_control.Temp.TemperatureReading> getTemperature(
+        temperature_control.Temp.TemperatureRequest request) {
+      return blockingServerStreamingCall(
           getChannel(), getGetTemperatureMethod(), getCallOptions(), request);
     }
 
@@ -297,14 +298,6 @@ public final class TemperatureControlServiceGrpc {
     protected TemperatureControlServiceFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new TemperatureControlServiceFutureStub(channel, callOptions);
-    }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<temperature_control.Temp.TemperatureReading> getTemperature(
-        temperature_control.Temp.TemperatureRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getGetTemperatureMethod(), getCallOptions()), request);
     }
 
     /**

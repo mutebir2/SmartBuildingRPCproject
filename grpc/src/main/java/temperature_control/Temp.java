@@ -3697,17 +3697,17 @@ public final class Temp {
       "atureResponse\022\017\n\007message\030\001 \001(\t\"K\n\030Adjust" +
       "TemperatureRequest\022\017\n\007zone_id\030\001 \001(\t\022\036\n\026t" +
       "emperature_adjustment\030\002 \001(\002\",\n\031AdjustTem" +
-      "peratureResponse\022\017\n\007message\030\001 \001(\t2\357\002\n\031Te" +
-      "mperatureControlService\022d\n\016GetTemperatur" +
+      "peratureResponse\022\017\n\007message\030\001 \001(\t2\361\002\n\031Te" +
+      "mperatureControlService\022f\n\016GetTemperatur" +
       "e\022\'.temperature_control.TemperatureReque" +
       "st\032\'.temperature_control.TemperatureRead" +
-      "ing\"\000\022v\n\025SetDesiredTemperature\022..tempera" +
-      "ture_control.DesiredTemperatureRequest\032+" +
-      ".temperature_control.SetTemperatureRespo" +
-      "nse\"\000\022t\n\021AdjustTemperature\022-.temperature" +
-      "_control.AdjustTemperatureRequest\032..temp" +
-      "erature_control.AdjustTemperatureRespons" +
-      "e\"\000b\006proto3"
+      "ing\"\0000\001\022v\n\025SetDesiredTemperature\022..tempe" +
+      "rature_control.DesiredTemperatureRequest" +
+      "\032+.temperature_control.SetTemperatureRes" +
+      "ponse\"\000\022t\n\021AdjustTemperature\022-.temperatu" +
+      "re_control.AdjustTemperatureRequest\032..te" +
+      "mperature_control.AdjustTemperatureRespo" +
+      "nse\"\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

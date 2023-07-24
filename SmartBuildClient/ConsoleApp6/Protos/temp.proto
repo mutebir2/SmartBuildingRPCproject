@@ -30,19 +30,9 @@ message AdjustTemperatureResponse {
   string message = 1;
 }
 
-message CurrentHumidityRequest {
-  string zone_id = 1;
-}
-
-message CurrentHumidityResponse {
-  float current_humidity = 1;
-}
-
 service TemperatureControlService {
-  rpc GetTemperature(TemperatureRequest) returns (TemperatureReading) {}
+  rpc GetTemperature(TemperatureRequest) returns (stream TemperatureReading) {}
   rpc SetDesiredTemperature(DesiredTemperatureRequest) returns (SetTemperatureResponse) {}
   rpc AdjustTemperature(AdjustTemperatureRequest) returns (AdjustTemperatureResponse) {}
-  rpc GetCurrentHumidity (CurrentHumidityRequest) returns (stream CurrentHumidityResponse) {}
-
   
 }
