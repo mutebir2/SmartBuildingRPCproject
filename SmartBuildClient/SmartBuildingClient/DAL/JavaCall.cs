@@ -2,6 +2,7 @@
 using Grpc.Core;
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.SignalR;
+using SmartBuildingClient.Hubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,21 +13,24 @@ using Zeroconf;
 
 namespace API
 {
-    public class ClientClass
+    public class JavaCall
     {
-
-        public delegate void TemperatureUpdateHandler(string temperatureData);
-        public static event TemperatureUpdateHandler OnTemperatureUpdate;
-
-
+       
         public static async Task Main(string[] args)
         {
 
-           await ContinuousPrintTemperatureStream("Building1");
+            //GetCurrentHumidityStream("exampleZone");
+            // await GetTemperatureData("Location");
+            //string message = await AdjustTemperature("002",00.32f);
+
+            // Console.WriteLine(GetTemperatureData("Location"));
+
+         //   string location = "Your desired location"; // Replace this with the actual location
+           /// await ContinuousPrintTemperatureStream(location);
 
         }
 
-        //public static async Task ContinuousStreamToClients(string location)
+        //public static async Task ContinuousStreamToClients(string location, IHubContext<TemperatureHub> hubContext)
         //{
         //    try
         //    {
@@ -76,58 +80,7 @@ namespace API
         //}
 
 
-
-        //public static async Task ContinuousPrintTemperatureStream(string location)
-        //{
-        //    try
-        //    {
-        //        var results = await ZeroconfResolver.ResolveAsync("_tempcontrol._tcp.local.");
-
-        //        if (results.Count == 0)
-        //        {
-        //            Console.WriteLine("No services found.");
-        //            return;
-        //        }
-
-        //        var service = results[0];
-
-        //        var ipAddress = service.IPAddresses.FirstOrDefault()?.ToString();
-        //        var port = jDmsServicePort.JdnsPortTemp;
-
-        //        var channel = GrpcChannel.ForAddress($"http://{ipAddress}:{port}");
-        //        var client = new TemperatureControlService.TemperatureControlServiceClient(channel);
-
-        //        var request = new TemperatureRequest { Location = location };
-        //        while (true)
-        //        {
-        //            using (var reply = client.GetTemperature(request))
-        //            {
-        //                await foreach (var temperatureReading in reply.ResponseStream.ReadAllAsync())
-        //                {
-        //                    Console.WriteLine($"Temperature: {temperatureReading.Temperature}°C");
-        //                    Console.WriteLine($"Location: {temperatureReading.Location}");
-        //                    Console.WriteLine($"Date and Time: {temperatureReading.DateTime}");
-        //                    Console.WriteLine("------------");
-        //                }
-        //            }
-
-        //            // Add a delay between consecutive streams to avoid overwhelming the server
-        //            await Task.Delay(1000); // 1 second delay
-        //        }
-        //    }
-        //    catch (RpcException ex)
-        //    {
-        //        Console.WriteLine("RPC error occurred: " + ex.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("An error occurred: " + ex.Message);
-        //    }
-        //}
-
-
-
-        public static async Task ContinuousPrintTemperatureStream(string location)
+        public static async Task ContinuousStreamToClients(string location, IHubContext<TemperatureHub> hubContext)
         {
             try
             {
@@ -148,25 +101,18 @@ namespace API
                 var client = new TemperatureControlService.TemperatureControlServiceClient(channel);
 
                 var request = new TemperatureRequest { Location = location };
-                while (true)
+
+                // Start the streaming call
+                using (var reply = client.GetTemperature(request))
                 {
-                    using (var reply = client.GetTemperature(request))
+                    await foreach (var temperatureReading in reply.ResponseStream.ReadAllAsync())
                     {
-                        await foreach (var temperatureReading in reply.ResponseStream.ReadAllAsync())
-                        {
-                            // Format the temperature data as a string
-                            var temperatureData = $"Temperature: {temperatureReading.Temperature}°C\n" +
-                                                 $"Location: {temperatureReading.Location}\n" +
-                                                 $"Date and Time: {temperatureReading.DateTime}\n" +
-                                                 "------------\n";
-
-                            // Raise the event to send temperature data to the calling code
-                            OnTemperatureUpdate?.Invoke(temperatureData);
-                        }
+                        // Send the temperature data to connected SignalR clients
+                        await hubContext.Clients.All.SendAsync("UpdateTemperature",
+                            temperatureReading.Temperature,
+                            temperatureReading.Location,
+                            temperatureReading.DateTime);
                     }
-
-                    // Add a delay between consecutive streams to avoid overwhelming the server
-                    await Task.Delay(1000); // 1 second delay
                 }
             }
             catch (RpcException ex)
@@ -178,6 +124,11 @@ namespace API
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
         }
+
+
+
+
+
 
 
 

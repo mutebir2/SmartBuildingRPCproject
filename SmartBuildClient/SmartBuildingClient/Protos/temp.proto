@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package temperature_control;
+
+message TemperatureRequest {
+  string location = 1;
+}
+
+message TemperatureReading {
+  float temperature = 1;
+  string location = 2;
+  string DateTime = 3;
+}
+
+message DesiredTemperatureRequest {
+  string zone_id = 1;
+  float desired_temperature = 2;
+}
+
+message SetTemperatureResponse {
+  string message = 1;
+}
+
+message AdjustTemperatureRequest {
+  string zone_id = 1;
+  float temperature_adjustment = 2;
+}
+
+message AdjustTemperatureResponse {
+  string message = 1;
+}
+
+service TemperatureControlService {
+  rpc GetTemperature(TemperatureRequest) returns (stream TemperatureReading) {}
+  rpc SetDesiredTemperature(DesiredTemperatureRequest) returns (SetTemperatureResponse) {}
+  rpc AdjustTemperature(AdjustTemperatureRequest) returns (AdjustTemperatureResponse) {}
+  
+}

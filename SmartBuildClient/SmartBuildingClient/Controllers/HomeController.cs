@@ -2,38 +2,62 @@
 using SmartBuildingClient.Models;
 using System.Diagnostics;
 using API;
+using Microsoft.AspNetCore.SignalR;
+using SmartBuildingClient.Hubs;
 
 namespace SmartBuildingClient.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHubContext<TemperatureHub> _hubContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHubContext<TemperatureHub> hubContext)
         {
             _logger = logger;
+            _hubContext = hubContext;
         }
 
         [HttpPost]
         public async Task<IActionResult> Search(string Location)
         {
 
-            //if (string.IsNullOrEmpty(Location))
+
+
+            //List<TemperatureReading> Temp = await ClientClass.ContinuousPrintTemperatureStream(Location);
+            //TemperatureReadingViewModel obj = new TemperatureReadingViewModel();
+
+            //foreach (var item in Temp)
             //{
-            //    TemperatureReadingViewModel obj1 = new TemperatureReadingViewModel();
-            //    return View(obj1);
+            //    obj.Temperature = item.Temperature;
+            //    obj.DateAndTime = item.DateAndTime;
+            //    obj.Location = item.Location;
             //}
+            //return View(obj);
 
-            List<TemperatureReading> Temp = await ClientClass.GetTemperatureData(Location);
-            TemperatureReadingViewModel obj = new TemperatureReadingViewModel();
+            return RedirectToAction("TemperatureData", new { location = Location });
+        }
 
-            foreach (var item in Temp)
-            {
-                obj.Temperature = item.Temperature;
-                obj.DateAndTime = item.DateAndTime;
-                obj.Location = item.Location;
-            }
-            return View(obj);
+
+        //public async Task<IActionResult> TemperatureData(string location)
+        //{
+        //    // Start the continuous stream to clients
+        //    await JavaCall.ContinuousStreamToClients(location, _hubContext);
+
+        //    // Return the view where real-time updates will be displayed
+        //     return  View();
+
+
+        //}
+
+        public IActionResult TemperatureData(string location)
+        {
+            // Start the continuous stream to clients in the background
+            // Task.Run allows the stream to run independently while the action returns immediately.
+            Task.Run(() => JavaCall.ContinuousStreamToClients(location, _hubContext));
+
+            // Return the view where real-time updates will be displayed
+            return View();
         }
 
         public IActionResult Search()
@@ -45,7 +69,7 @@ namespace SmartBuildingClient.Controllers
         [HttpPost]
         public async Task<IActionResult> setTemperature(string ZoneId, float TemperatureToSet)
         {
-            string response = await ClientClass.AdjustTemperature(ZoneId, TemperatureToSet);
+            string response = await JavaCall.AdjustTemperature(ZoneId, TemperatureToSet);
             SetTemperatureViewModel obj = new SetTemperatureViewModel();
             obj.Message = response;
             return View(obj);

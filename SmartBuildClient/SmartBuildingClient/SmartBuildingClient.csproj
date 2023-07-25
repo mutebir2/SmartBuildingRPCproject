@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.Net.Client" Version="2.55.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.9" />
     <PackageReference Include="Zeroconf" Version="3.6.11" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ConsoleApp6\API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Protos\temp.proto">
+      <GrpcServices>Client</GrpcServices>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,29 @@
+﻿<!-- TemperatureData.cshtml -->
+@model TemperatureReadingViewModel
+
+<h1>Real-Time Temperature Data</h1>
+<div id="temperatureData"></div>
+
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/temperatureHub") // Make sure to adjust the URL if needed
+            .build();
+
+        connection.start()
+            .then(() => console.log("SignalR connection established."))
+            .catch(error => console.error(error));
+
+        connection.on("UpdateTemperature", (temperature, location, dateTime) => {
+            const temperatureDataElement = document.getElementById("temperatureData");
+            temperatureDataElement.innerHTML = `
+                <p>Temperature: ${temperature}°C</p>
+                <p>Location: ${location}</p>
+                <p>Date and Time: ${dateTime}</p>
+                <hr />
+            ` + temperatureDataElement.innerHTML;
+        });
+    </script>
+                            
+}
